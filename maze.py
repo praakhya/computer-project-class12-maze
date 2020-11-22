@@ -1,3 +1,9 @@
+'''
+This is the main program executor for the maze project.
+\@Author Praakhya Avasthi
+\@Roll No 42
+'''
+
 import pygame, sys, random, winsound
 from pygame.locals import *
 from rectangle import Rectangle
