@@ -19,9 +19,10 @@ cnvw = 1000
 maxx = 21
 maxy=18
 fact = min(cnvw//maxx, cnvh//maxy)
-env = Environment(cnvw, cnvh, "winterlandscape.png","brickh.jpg", "brickv.jpg", "gems.png", fact)
+env = Environment(cnvw, cnvh, "winterlandscape.png","brick1x1.jpg", "brick1x1.jpg", "gems.png", fact)
 fin = Finish(int(20*fact), int(15*fact), 1*fact, 2*fact, env)
 walls=[]
+'''
 vars1 = [
 [0,0,21,1],
 [0,0,1,14],
@@ -64,37 +65,39 @@ vars1 = [
 [17,13,3,1],
 [17,13,1,2],
 [17,16,1,2]]
+'''
 
 
-
-##var = [
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW",
-##"WWWWWWWWWWWWWWWWWWWWW"
-##]
+vars1 = [
+"WWWWWWWWWWWWWWWWWWWWW",
+"WEEEEEEEEEEEEEEEEEEEW",
+"WEWWWWWWWWWWWEEWWEWEW",
+"WEEEEEWEEEEEWWEEWEWEW",
+"WEEEEEWEWWWEEWEEEEWEW",
+"WEEEEEWEWEWWEWWWWWWEW",
+"WEEEEEWEWEEEEEEEEEEEW",
+"WWWEEEWEWWWWWWWWWEWWW",
+"WEWEEEWEEEWEEEEEWEEEW",
+"WEWWWEWEEEWEWWWWWEWEW",
+"WEWEEEWEEEWEWEEEEEWEW",
+"WEWEWWWWEEWEWEWWWWWWW",
+"WEWEWEEEEEWEEEEWEEEEW",
+"WEWEWEWWWWWEWWEWEWWWW",
+"EEWEWEEEEEEEWEEWEWEEW",
+"WEWEWWWEWWWWWEEWEEEEE",
+"WEEEWEWEEEEEEEEEEWEEE",
+"WWWWWWWWWWWWWWWWWWWWW"
+]
 
 
 
 y=0
 w=10
 h=10
-for i in vars1:
-    env.addWall(Wall(i[0]*fact, i[1]*fact, i[2]*fact, i[3]*fact, env))
+for i in range(len(vars1)):
+    for j in range(len(vars1[i])):
+        if vars1[i][j]=='W':
+            env.addWall(Wall(j*fact, i*fact, 1*fact, 1*fact, env))
 print('done')
 env.addFinish(fin)
 env.run()
