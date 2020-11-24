@@ -4,7 +4,7 @@ This is the main program executor for the maze project.
 \@Roll No 42
 '''
 
-import pygame, sys, random, winsound
+import pygame, sys, random
 from pygame.locals import *
 from rectangle import Rectangle
 import time

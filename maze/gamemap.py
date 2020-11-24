@@ -1,5 +1,5 @@
 
-import pygame, sys, random, winsound
+import pygame, sys, random
 from pygame.locals import *
 from rectangle import Rectangle
 import time

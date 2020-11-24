@@ -1,4 +1,4 @@
-import pygame, sys, random, winsound
+import pygame, sys, random
 from pygame.locals import *
 from rectangle import Rectangle
 import time
@@ -6,18 +6,20 @@ from ball import Ball
 from gem import Gem
 from finish import Finish
 from wall import Wall
+from pygame import mixer
 
 class Environment(): 
-    def __init__(self, w, h, background, tileh, tilev, gemimg, fact):
+    def __init__(self, w, h, background, tileh, tilev, gemimg, fact, ballcol, score=0):
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
         self.myfont = pygame.font.SysFont('Impact', 100)
         self.w = w
         self.h = h
         self.fact = fact
-        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, (20,20,20),self, 5)
+        self.ballcol = ballcol
+        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, self.ballcol,self, 5)
         self.running = True
-        self.score=0
+        self.score=score
         #self.clock = pygame.time.Clock()
         self.walls = []
         self.gems=[]
@@ -34,7 +36,10 @@ class Environment():
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
-        self.mouse = pygame.mouse.get_pos()
+        mixer.init()
+        mixer.music.load('beep.wav')
+        mixer.music.set_volume(0.7)
+        
         
 
     def drawTime(self):
@@ -49,38 +54,22 @@ class Environment():
         self.screen.blit(textsurface,(self.w - 400,self.h-100))
 
     def beep(self):
-        frequency = 200  # Set Frequency To 200 Hertz
-        duration = 500  # Set Duration To 500 ms == 1 second
-        winsound.Beep(frequency, duration)
+        mixer.music.play()
     
 
     def run(self):
         self.draw()
         while self.running:
-            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
                 elif event.type == pygame.KEYUP and event.key == pygame.K_q:
                     self.running = False
-
-     
-                #if the mouse is clicked on the 
-                # button the game is terminated 
-                '''
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.btn.x <= self.mouse[0] <= self.btn.x+self.btn.w and self.btn.y <= self.mouse[1] <= self.btn.h+self.btn.y: 
-                        print('Intersecting')
-                    if self.doesIntersectWithButton():
-                        self.running==False
-                '''
-
-
             self.spawnGems()     
             if self.expireGame():
-                self.losetext = 'Your Time is Up!'
-                #self.running = False
-                #self.beep()
+                    self.losetext = 'Your Time is Up!'
+                    self.running = False
+                    self.beep()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_RIGHT]:
                 futureball = Rectangle.fromCircle(self.b.x+self.b.speed, self.b.y, self.b.radius)
@@ -150,21 +139,15 @@ class Environment():
             pygame.display.update()
             pygame.time.delay(1200)
         if self.losetext!=None:
-            self.loseGameEnd()
-            '''
             pygame.draw.rect(self.screen,(200, 0, 0 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
             textsurface = self.myfont.render(self.losetext, False, (0, 0, 0))
             self.screen.blit(textsurface,(self.w//2-275,self.h//2-100))
             pygame.display.update()
             pygame.time.delay(1200)
-            '''
         pygame.display.update()
-     
-    '''   
-    def addButton(self,btn):
-        self.btn =btn
-    '''
-
+        
+        
+    
     def addWall(self, wl):
         self.walls.append(wl)
 
@@ -177,10 +160,6 @@ class Environment():
             if rw.intersect(r):
                 return True,i
         return False,None
-    
-    def doesIntersectWithButton(self):
-        if self.btn.x <= self.mouse[0] <= self.btn.x+self.btn.w and self.btn.y <= self.mouse[1] <= self.btn.h+self.btn.y: 
-            print('Intersecting')
 
     def doesIntersectWithGem(self, r):
         for g in self.gems:
@@ -221,26 +200,10 @@ class Environment():
         return False
     
     def expireGame(self):
-        if time.process_time() - self.startTime>=10:
+        if time.process_time() - self.startTime>=60:
             return True
         return False
 
-    def loseGameEnd(self):
-        #pygame.draw.rect(self.screen,(200, 0, 0 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
-        self.screen.fill((200, 0, 0))
-        textsurface1 = self.myfont.render(self.losetext, False, (0, 0, 0))
-        self.screen.blit(textsurface1,(self.w//2-275,10))
-        textsurface2 = self.myfont.render('Your Score: {}'.format(self.score), False, (0, 0, 0))
-        self.screen.blit(textsurface2,(self.w//2-275,self.h//2-100))
-        '''
-        self.btn.draw()
-        textsurface3 = self.myfont.render('Quit'.format(self.score), False, (200, 200, 200))
-        # superimposing the text onto our button 
-        self.screen.blit(textsurface3 , (self.w/2+50,self.h/2)) 
-        '''
 
-
-        pygame.display.update()
-        pygame.time.delay(1200)
 
 

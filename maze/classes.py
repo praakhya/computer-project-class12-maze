@@ -1,7 +1,8 @@
-import pygame, sys, random, winsound
+import pygame, sys, random
 from pygame.locals import *
 from rectangle import Rectangle
 import time
+from pygame import mixer
 
 class Environment():
     def __init__(self, w, h, background, tileh, tilev, gemimg):
@@ -24,6 +25,9 @@ class Environment():
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
+        mixer.init()
+        mixer.music.load('beep.wav')
+        mixer.music.set_volume(0.7)
         
         
 
@@ -40,9 +44,7 @@ class Environment():
         self.screen.blit(textsurface,(self.w - 400,self.h-100))
 
     def beep(self):
-        frequency = 200  # Set Frequency To 200 Hertz
-        duration = 500  # Set Duration To 500 ms == 1 second
-        winsound.Beep(frequency, duration)
+        mixer.music.play()
     
 
     def run(self):
