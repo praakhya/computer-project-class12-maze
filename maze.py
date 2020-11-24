@@ -12,8 +12,65 @@ from environment import Environment
 from wall import Wall
 from gem import Gem
 from finish import Finish
+from gamemap import GameMap
 
 pygame.init()
+map1=[
+    "WWWWWWWWWWWWWWWWWWWWW",
+    "WEEEEEEEEEEEEEEEEEEEW",
+    "WEWWWWWWWWWWWEEWWEWEW",
+    "WEEEEEWEEEEEWWEEWEWEW",
+    "WEEEEEWEWWWEEWEEEEWEW",
+    "WEEEEEWEWEWWEWWWWWWEW",
+    "WEEEEEWEWEEEEEEEEEEEW",
+    "WWWEEEWEWWWWWWWWWEWWW",
+    "WEWEEEWEEEWEEEEEWEEEW",
+    "WEWWWEWEEEWEWWWWWEWEW",
+    "WEWEEEWEEEWEWEEEEEWEW",
+    "WEWEWWWWEEWEWEWWWWWWW",
+    "WEWEWEEEEEWEEEEWEEEEW",
+    "WEWEWEWWWWWEWWEWEWWWW",
+    "EEWEWEEEEEEEWEEWEWEEW",
+    "WEWEWWWEWWWWWEEWEEEEE",
+    "WEEEWEWEEEEEEEEEEWEEE",
+    "WWWWWWWWWWWWWWWWWWWWW"
+    ]
+
+map2=[
+    'W'*21,
+    'WEEEEEEEEEWEEEEEEEEEW',
+    'WEWWWWWWWEWEWWWEWWWWW',
+    'WEWWEEEEWEWEWEWEEEEEW',
+    'WEWWEEEEWEWEWEWWWEEEW',
+    'WEWWWWWEWEEEWEEEEEEEW',
+    'WEWEEEWEWWWWWWWWWWEEW',
+    'WEWWWEWEWEEEWEEEEEEEW',
+    'WEEEWEWEEEWEWEWWWWWWW',
+    'WEWWWEWEWWWEWEWEEEEEW',
+    'WEEEEEEEWEEEWEWEWEWWW',
+    'WWWWWEWWWWWWWEWEWEEEW',
+    'WEEEEEWEEEEEEEWEWWEEW',
+    'WEWEWWWEWWWWWWWEWEEEW',
+    'EEWEWEEEWEEEWEEEWEEEW',
+    'WEWWWEWWWEWEWEWEWEEEE',
+    'WEWEEEEEEEWEEEWEWEEEE',
+    'W'*21
+]
+
+gm1 = GameMap(map1,"nightbg.jpg","neontile.png", "neongem.png",(255, 110, 199))
+gm1.run()
+
+pygame.init()
+gm2 = GameMap(map2,"winterlandscape.png","brick1x1.jpg", "gems.png", (20,20,20), gm1.env.score)
+gm2.run()
+chosenmap=random.choice([gm1, gm2])
+
+
+
+
+
+"""
+
 cnvh = 1000
 cnvw = 1000
 maxx = 21
@@ -171,4 +228,4 @@ env.run()
 ##        return collision
             
             
-        
+"""       

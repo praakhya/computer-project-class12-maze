@@ -8,16 +8,17 @@ from finish import Finish
 from wall import Wall
 
 class Environment(): 
-    def __init__(self, w, h, background, tileh, tilev, gemimg, fact):
+    def __init__(self, w, h, background, tileh, tilev, gemimg, fact, ballcol, score=0):
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
         self.myfont = pygame.font.SysFont('Impact', 100)
         self.w = w
         self.h = h
         self.fact = fact
-        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, (20,20,20),self, 5)
+        self.ballcol = ballcol
+        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, self.ballcol,self, 5)
         self.running = True
-        self.score=0
+        self.score=score
         #self.clock = pygame.time.Clock()
         self.walls = []
         self.gems=[]
@@ -197,7 +198,7 @@ class Environment():
         return False
     
     def expireGame(self):
-        if time.process_time() - self.startTime>=200:
+        if time.process_time() - self.startTime>=60:
             return True
         return False
 
