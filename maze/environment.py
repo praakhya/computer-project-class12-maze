@@ -1,11 +1,11 @@
 import pygame, sys, random
 from pygame.locals import *
-from rectangle import Rectangle
+from maze.rectangle import Rectangle
 import time
-from ball import Ball
-from gem import Gem
-from finish import Finish
-from wall import Wall
+from maze.ball import Ball
+from maze.gem import Gem
+from maze.finish import Finish
+from maze.wall import Wall
 from pygame import mixer
 
 class Environment(): 
@@ -37,7 +37,7 @@ class Environment():
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
         mixer.init()
-        mixer.music.load('beep.wav')
+        mixer.music.load('maze/beep.wav')
         mixer.music.set_volume(0.7)
         
         

@@ -1,12 +1,12 @@
 
 import pygame, sys, random
 from pygame.locals import *
-from rectangle import Rectangle
+from maze.rectangle import Rectangle
 import time
-from environment import Environment
-from wall import Wall
-from gem import Gem
-from finish import Finish
+from maze.environment import Environment
+from maze.wall import Wall
+from maze.gem import Gem
+from maze.finish import Finish
 pygame.init()
 
 class GameMap():

@@ -6,64 +6,67 @@ This is the main program executor for the maze project.
 
 import pygame, sys, random
 from pygame.locals import *
-from rectangle import Rectangle
+from maze.rectangle import Rectangle
 import time
-from environment import Environment
-from wall import Wall
-from gem import Gem
-from finish import Finish
-from gamemap import GameMap
+from maze.environment import Environment
+from maze.wall import Wall
+from maze.gem import Gem
+from maze.finish import Finish
+from maze.gamemap import GameMap
 
 pygame.init()
-map1=[
-    "WWWWWWWWWWWWWWWWWWWWW",
-    "WEEEEEEEEEEEEEEEEEEEW",
-    "WEWWWWWWWWWWWEEWWEWEW",
-    "WEEEEEWEEEEEWWEEWEWEW",
-    "WEEEEEWEWWWEEWEEEEWEW",
-    "WEEEEEWEWEWWEWWWWWWEW",
-    "WEEEEEWEWEEEEEEEEEEEW",
-    "WWWEEEWEWWWWWWWWWEWWW",
-    "WEWEEEWEEEWEEEEEWEEEW",
-    "WEWWWEWEEEWEWWWWWEWEW",
-    "WEWEEEWEEEWEWEEEEEWEW",
-    "WEWEWWWWEEWEWEWWWWWWW",
-    "WEWEWEEEEEWEEEEWEEEEW",
-    "WEWEWEWWWWWEWWEWEWWWW",
-    "EEWEWEEEEEEEWEEWEWEEW",
-    "WEWEWWWEWWWWWEEWEEEEE",
-    "WEEEWEWEEEEEEEEEEWEEE",
-    "WWWWWWWWWWWWWWWWWWWWW"
+
+def runGame():
+
+    map1=[
+        "WWWWWWWWWWWWWWWWWWWWW",
+        "WEEEEEEEEEEEEEEEEEEEW",
+        "WEWWWWWWWWWWWEEWWEWEW",
+        "WEEEEEWEEEEEWWEEWEWEW",
+        "WEEEEEWEWWWEEWEEEEWEW",
+        "WEEEEEWEWEWWEWWWWWWEW",
+        "WEEEEEWEWEEEEEEEEEEEW",
+        "WWWEEEWEWWWWWWWWWEWWW",
+        "WEWEEEWEEEWEEEEEWEEEW",
+        "WEWWWEWEEEWEWWWWWEWEW",
+        "WEWEEEWEEEWEWEEEEEWEW",
+        "WEWEWWWWEEWEWEWWWWWWW",
+        "WEWEWEEEEEWEEEEWEEEEW",
+        "WEWEWEWWWWWEWWEWEWWWW",
+        "EEWEWEEEEEEEWEEWEWEEW",
+        "WEWEWWWEWWWWWEEWEEEEE",
+        "WEEEWEWEEEEEEEEEEWEEE",
+        "WWWWWWWWWWWWWWWWWWWWW"
+        ]
+
+    map2=[
+        'W'*21,
+        'WEEEEEEEEEWEEEEEEEEEW',
+        'WEWWWWWWWEWEWWWEWWWWW',
+        'WEWWEEEEWEWEWEWEEEEEW',
+        'WEWWEEEEWEWEWEWWWEEEW',
+        'WEWWWWWEWEEEWEEEEEEEW',
+        'WEWEEEWEWWWWWWWWWWEEW',
+        'WEWWWEWEWEEEWEEEEEEEW',
+        'WEEEWEWEEEWEWEWWWWWWW',
+        'WEWWWEWEWWWEWEWEEEEEW',
+        'WEEEEEEEWEEEWEWEWEWWW',
+        'WWWWWEWWWWWWWEWEWEEEW',
+        'WEEEEEWEEEEEEEWEWWEEW',
+        'WEWEWWWEWWWWWWWEWEEEW',
+        'EEWEWEEEWEEEWEEEWEEEW',
+        'WEWWWEWWWEWEWEWEWEEEE',
+        'WEWEEEEEEEWEEEWEWEEEE',
+        'W'*21
     ]
 
-map2=[
-    'W'*21,
-    'WEEEEEEEEEWEEEEEEEEEW',
-    'WEWWWWWWWEWEWWWEWWWWW',
-    'WEWWEEEEWEWEWEWEEEEEW',
-    'WEWWEEEEWEWEWEWWWEEEW',
-    'WEWWWWWEWEEEWEEEEEEEW',
-    'WEWEEEWEWWWWWWWWWWEEW',
-    'WEWWWEWEWEEEWEEEEEEEW',
-    'WEEEWEWEEEWEWEWWWWWWW',
-    'WEWWWEWEWWWEWEWEEEEEW',
-    'WEEEEEEEWEEEWEWEWEWWW',
-    'WWWWWEWWWWWWWEWEWEEEW',
-    'WEEEEEWEEEEEEEWEWWEEW',
-    'WEWEWWWEWWWWWWWEWEEEW',
-    'EEWEWEEEWEEEWEEEWEEEW',
-    'WEWWWEWWWEWEWEWEWEEEE',
-    'WEWEEEEEEEWEEEWEWEEEE',
-    'W'*21
-]
+    gm1 = GameMap(map1,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199))
+    gm1.run()
 
-gm1 = GameMap(map1,"nightbg.jpg","neontile.png", "neongem.png",(255, 110, 199))
-gm1.run()
-
-pygame.init()
-gm2 = GameMap(map2,"winterlandscape.png","brick1x1.jpg", "gems.png", (20,20,20), gm1.env.score)
-gm2.run()
-chosenmap=random.choice([gm1, gm2])
+    pygame.init()
+    gm2 = GameMap(map2,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20), gm1.env.score)
+    gm2.run()
+    chosenmap=random.choice([gm1, gm2])
 
 
 
