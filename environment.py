@@ -6,6 +6,7 @@ from ball import Ball
 from gem import Gem
 from finish import Finish
 from wall import Wall
+from button import Button
 
 class Environment(): 
     def __init__(self, w, h, background, tileh, tilev, gemimg, fact):
@@ -34,7 +35,7 @@ class Environment():
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
-        
+        self.mouse = pygame.mouse.get_pos()
         
 
     def drawTime(self):
@@ -62,11 +63,21 @@ class Environment():
                     self.running = False
                 elif event.type == pygame.KEYUP and event.key == pygame.K_q:
                     self.running = False
+
+     
+                #if the mouse is clicked on the 
+                # button the game is terminated 
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.doesIntersectWithButton():
+                        self.running==False
+                
+
+
             self.spawnGems()     
             if self.expireGame():
-                    self.losetext = 'Your Time is Up!'
-                    self.running = False
-                    self.beep()
+                self.losetext = 'Your Time is Up!'
+                #self.running = False
+                #self.beep()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_RIGHT]:
                 futureball = Rectangle.fromCircle(self.b.x+self.b.speed, self.b.y, self.b.radius)
@@ -136,14 +147,18 @@ class Environment():
             pygame.display.update()
             pygame.time.delay(1200)
         if self.losetext!=None:
+            self.loseGameEnd()
+            '''
             pygame.draw.rect(self.screen,(200, 0, 0 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
             textsurface = self.myfont.render(self.losetext, False, (0, 0, 0))
             self.screen.blit(textsurface,(self.w//2-275,self.h//2-100))
             pygame.display.update()
             pygame.time.delay(1200)
+            '''
         pygame.display.update()
         
-        
+    def addButton(self,btn):
+        self.btn =btn
     
     def addWall(self, wl):
         self.walls.append(wl)
@@ -157,6 +172,11 @@ class Environment():
             if rw.intersect(r):
                 return True,i
         return False,None
+    
+    def doesIntersectWithButton(self):
+        if self.btn.x <= self.mouse[0] <= self.btn.x+self.btn.w and self.btn.y <= self.mouse[1] <= self.btn.h+self.btn.y: 
+            print('intersecting')
+            return True
 
     def doesIntersectWithGem(self, r):
         for g in self.gems:
@@ -197,10 +217,25 @@ class Environment():
         return False
     
     def expireGame(self):
-        if time.process_time() - self.startTime>=200:
+        if time.process_time() - self.startTime>=10:
             return True
         return False
 
+    def loseGameEnd(self):
+        #pygame.draw.rect(self.screen,(200, 0, 0 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
+        self.screen.fill((200, 0, 0))
+        textsurface1 = self.myfont.render(self.losetext, False, (0, 0, 0))
+        self.screen.blit(textsurface1,(self.w//2-275,10))
+        textsurface2 = self.myfont.render('Your Score: {}'.format(self.score), False, (0, 0, 0))
+        self.screen.blit(textsurface2,(self.w//2-275,self.h//2-100))
+        self.btn.draw()
+        textsurface3 = self.myfont.render('Quit'.format(self.score), False, (200, 200, 200))
+        # superimposing the text onto our button 
+        self.screen.blit(textsurface3 , (self.w/2+50,self.h/2)) 
 
+
+
+        pygame.display.update()
+        pygame.time.delay(1200)
 
 

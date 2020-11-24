@@ -12,6 +12,7 @@ from environment import Environment
 from wall import Wall
 from gem import Gem
 from finish import Finish
+from button import Button
 
 pygame.init()
 cnvh = 1000
@@ -21,6 +22,7 @@ maxy=18
 fact = min(cnvw//maxx, cnvh//maxy)
 env = Environment(cnvw, cnvh, "winterlandscape.png","brick1x1.jpg", "brick1x1.jpg", "gems.png", fact)
 fin = Finish(int(20*fact), int(15*fact), 1*fact, 2*fact, env)
+btn = Button(int(9*fact), int(15*fact), 5*fact, 2*fact, env)
 walls=[]
 '''
 vars1 = [
@@ -100,6 +102,7 @@ for i in range(len(vars1)):
             env.addWall(Wall(j*fact, i*fact, 1*fact, 1*fact, env))
 print('done')
 env.addFinish(fin)
+env.addButton(btn)
 env.run()
 
 
