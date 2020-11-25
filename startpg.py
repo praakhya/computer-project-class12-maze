@@ -1,6 +1,6 @@
 import pygame, random, time
 from start.button import Button
-from maze import maze
+from maze import mainrun
 import pygame, sys, random
 from pygame.locals import *
 from maze.rectangle import Rectangle
@@ -10,6 +10,7 @@ from maze.wall import Wall
 from maze.gem import Gem
 from maze.finish import Finish, Finishwall
 from maze.gamemap import GameMap
+from arushi.gameworking import runcargame as rcg
 
 pygame.init()
 
@@ -55,7 +56,7 @@ class StartEnvironment():
                 elif self.startb.intersect(coord):
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         running=False
-                        maze.runGame()
+                        mainrun.runGame()
                         flag='end'
             if flag!= 'end':
                 self.draw()

@@ -13,6 +13,7 @@ from maze.wall import Wall
 from maze.gem import Gem
 from maze.finish import Finish
 from maze.gamemap import GameMap
+from arushi.gameworking import runcargame as rcg
 
 pygame.init()
 
@@ -61,10 +62,11 @@ def runGame():
     ]
     
     gm1 = GameMap(map1,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199))
-    gm2 = GameMap(map2,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20), gm1.env.score)
+    gm2 = GameMap(map2,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20))
    
     chosenmap=random.choice([gm1, gm2])
     chosenmap.run()
+    rcg(chosenmap.env.score)
 
 
 
