@@ -292,9 +292,9 @@ def runcargame(incomingscore=0):
     SOUND['wing'] = pygame.mixer.Sound('arushi/gallery/audio/wing.wav')
 
 
-    while True:
-        startScreen() # Shows welcome screen to the user until a button is pressed
-        mainGame() # This is the main game function 
+    # while True:
+    startScreen() # Shows welcome screen to the user until a button is pressed
+    mainGame() # This is the main game function 
     
     return score
 
