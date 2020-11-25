@@ -8,7 +8,7 @@ import time
 from maze.environment import Environment
 from maze.wall import Wall
 from maze.gem import Gem
-from maze.finish import Finish
+from maze.finish import Finish, Finishwall
 from maze.gamemap import GameMap
 
 pygame.init()
@@ -41,6 +41,7 @@ class StartEnvironment():
     def run(self):
         running=True
         self.draw()
+        flag=None
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -50,11 +51,16 @@ class StartEnvironment():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         print('True')
                         running=False
+                        flag='end'
                 elif self.startb.intersect(coord):
                     if event.type == pygame.MOUSEBUTTONDOWN:
-                        maze.runGame()
                         running=False
-            self.draw()
+                        maze.runGame()
+                        flag='end'
+            if flag!= 'end':
+                self.draw()
+            else:
+                pygame.quit()
         pygame.quit()
     
     def draw(self):

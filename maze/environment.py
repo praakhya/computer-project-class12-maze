@@ -4,7 +4,7 @@ from maze.rectangle import Rectangle
 import time
 from maze.ball import Ball
 from maze.gem import Gem
-from maze.finish import Finish
+from maze.finish import Finish, Finishwall
 from maze.wall import Wall
 from pygame import mixer
 
@@ -23,12 +23,16 @@ class Environment():
         #self.clock = pygame.time.Clock()
         self.walls = []
         self.gems=[]
+        self.gemPoint = None
         self.fin = None
-        self.gemw = 50
-        self.gemh = 50
+        self.finwall=None
+        self.gemw = 30
+        self.gemh = 30
         self.wintext=None
         self.losetext=None
-        self.maxGems=5
+        self.unlock=False
+        self.noGems=5
+        self.gemCount = 0
         self.bgimg = pygame.image.load(background)
         self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))
         self.tilehimg = pygame.image.load(tileh)
@@ -37,8 +41,9 @@ class Environment():
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
         mixer.init()
-        mixer.music.load('maze/beep.wav')
-        mixer.music.set_volume(0.7)
+        self.m1 = pygame.mixer.Sound('maze/beep.wav')
+        self.m2 = pygame.mixer.Sound('maze/Latch_01.wav')
+        self.m1.set_volume(0.7)
         
         
 
@@ -54,18 +59,21 @@ class Environment():
         self.screen.blit(textsurface,(self.w - 400,self.h-100))
 
     def beep(self):
-        mixer.music.play()
+        self.m1.play(1,200)
+    
+    def unlocksound(self):
+        self.m2.play(1,200)
     
 
     def run(self):
+        self.spawnGems()
         self.draw()
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
                 elif event.type == pygame.KEYUP and event.key == pygame.K_q:
-                    self.running = False
-            self.spawnGems()     
+                    self.running = False  
             if self.expireGame():
                     self.losetext = 'Your Time is Up!'
                     self.running = False
@@ -78,37 +86,39 @@ class Environment():
                     self.running = False
                     self.beep()
                 self.handleGems(futureball)
-                di, w = self.doesIntersect(futureball) 
-                if  not di:
+                di1, w = self.doesIntersect(futureball) 
+                di2 = self.doesIntersectWithFinwall(futureball)
+                if  not (di1 or di2):
                     self.b.moveRight()
                 else:
                     self.beep()
             elif keys[pygame.K_LEFT]:
                 futureball = Rectangle.fromCircle(self.b.x-self.b.speed, self.b.y, self.b.radius)
                 self.handleGems(futureball)
-                di, w = self.doesIntersect(futureball)
-                if  not di:
+                di1, w = self.doesIntersect(futureball)
+                di2 = self.doesIntersectWithFinwall(futureball)
+                if  not (di1 or di2):
                     self.b.moveLeft()
                 else:
                     self.beep()
             elif keys[pygame.K_UP]:
                 futureball = Rectangle.fromCircle(self.b.x, self.b.y-self.b.speed, self.b.radius)
                 self.handleGems(futureball)
-                di, w = self.doesIntersect(futureball)
-                if  not di:
+                di1, w = self.doesIntersect(futureball)
+                di2 = self.doesIntersectWithFinwall(futureball)
+                if  not (di1 or di2):
                     self.b.moveUp()
                 else:
                     self.beep()                        
             elif keys[pygame.K_DOWN]:
                 futureball = Rectangle.fromCircle(self.b.x, self.b.y+self.b.speed, self.b.radius)
                 self.handleGems(futureball)
-                di, w = self.doesIntersect(futureball)
-                if  not di:
+                di1, w = self.doesIntersect(futureball)
+                di2 = self.doesIntersectWithFinwall(futureball)
+                if  not (di1 or di2):
                     self.b.moveDown()
                 else:
-                    self.beep()                        
-
-            
+                    self.beep() 
             self.draw()
         #self.clock.tick(60)
         pygame.quit()
@@ -118,17 +128,25 @@ class Environment():
         if gi:
             self.score+=g.score
             self.removeGem(g)
+            if len(self.gems) == 0:
+                self.unlock=True
+                self.unlocksound()                       
+
 
 
     def draw(self):
         self.screen = pygame.display.set_mode((self.w,self.h))
         self.screen.blit(self.bgimg,[0,0])
-        self.b.draw()
-        self.fin.draw()
-        for i in self.walls:
-            i.draw()
         for j in self.gems:
             j.draw()
+        self.b.draw()
+        self.fin.draw()
+        if self.unlock == True:
+            self.finwall.w = self.finwall.h = 0
+        else:
+            self.finwall.draw()
+        for i in self.walls:
+            i.draw()
         textsurface = self.myfont.render(str(self.score), False, (0, 0, 0))
         self.screen.blit(textsurface,(10,self.h-100))
         self.drawTime()
@@ -146,13 +164,14 @@ class Environment():
             pygame.time.delay(1200)
         pygame.display.update()
         
-        
-    
     def addWall(self, wl):
         self.walls.append(wl)
 
     def addFinish(self, fin):
         self.fin = fin
+    
+    def addFinishwall(self, finwall):
+        self.finwall = finwall
 
     def doesIntersect(self, r):
         for i in self.walls:
@@ -160,6 +179,12 @@ class Environment():
             if rw.intersect(r):
                 return True,i
         return False,None
+
+    def doesIntersectWithFinwall(self, r):
+        rw = Rectangle(self.finwall.x, self.finwall.y, self.finwall.w, self.finwall.h)
+        if rw.intersect(r):
+            return True
+        return False
 
     def doesIntersectWithGem(self, r):
         for g in self.gems:
@@ -172,20 +197,23 @@ class Environment():
         self.gems = [g for g in self.gems if g.x != gm.x and g.y != gm.y]
 
     def addGem(self, gm):
+        self.gemPoint=gm.score
         self.gems.append(gm)
     
     def spawnGems(self):
-        num = random.randint(0,100)
-        if num==0:
+        #num = random.randint(0,20)
+        #if num==0: #and self.gemCount<self.maxGems:
+        while self.gemCount<self.noGems:
             x,y, posfound = self.findPosition()
-            if posfound and len(self.gems)<self.maxGems:
-                self.addGem(Gem(x, y, self))
-                
+            if posfound:
+                self.addGem(Gem(x,y,self))
+                self.gemCount+=1
+        
 
     def findPosition(self):
-        for i in range(999):
-            x= random.randint(0,700)
-            y= random.randint(0,700)
+        for i in range(10000):
+            x= random.randint(0,15*self.fact)
+            y= random.randint(0,15*self.fact)
             r = Rectangle(x,y,self.gemw, self.gemh)
             iw, w = self.doesIntersect(r)
             ig, g = self.doesIntersectWithGem(r)

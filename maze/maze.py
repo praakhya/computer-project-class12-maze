@@ -43,8 +43,8 @@ def runGame():
         'W'*21,
         'WEEEEEEEEEWEEEEEEEEEW',
         'WEWWWWWWWEWEWWWEWWWWW',
-        'WEWWEEEEWEWEWEWEEEEEW',
-        'WEWWEEEEWEWEWEWWWEEEW',
+        'WEWEEEEEWEWEWEWEEEEEW',
+        'WEWEEEEEWEWEWEWWWEEEW',
         'WEWWWWWEWEEEWEEEEEEEW',
         'WEWEEEWEWWWWWWWWWWEEW',
         'WEWWWEWEWEEEWEEEEEEEW',
@@ -59,15 +59,12 @@ def runGame():
         'WEWEEEEEEEWEEEWEWEEEE',
         'W'*21
     ]
-
+    
     gm1 = GameMap(map1,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199))
-    gm1.run()
-
-    pygame.init()
     gm2 = GameMap(map2,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20), gm1.env.score)
-    gm2.run()
+   
     chosenmap=random.choice([gm1, gm2])
-
+    chosenmap.run()
 
 
 
