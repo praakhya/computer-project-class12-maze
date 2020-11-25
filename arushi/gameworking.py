@@ -18,6 +18,7 @@ SOUND = {}
 REWARD_POINTS = 5
 SCREENCAPTION = 'Game 2'
 score = 0
+icScore = 0
 #Images
 PLAYER = 'arushi/gallery/car.png'            
 BACKGROUND = 'arushi/gallery/background.jpg' 
@@ -208,7 +209,7 @@ def mainGame():
             SCREEN.blit(IMAGES['numbers'][digit], (Xoffset, SCREENHEIGHT*0.9))
             Xoffset += IMAGES['numbers'][digit].get_width()
         pygame.display.update()
-        FPSCLOCK.tick(FPS+score/2)
+        FPSCLOCK.tick(FPS+(score - icScore)/2)
 
 def hitObstacle(playerX, playerY, upperObstacles, lowerObstacles):
     if playerY > (GROUND_Y - 25)  or playerY < 0:
@@ -256,7 +257,9 @@ def runcargame(incomingscore=0):
     global FPSCLOCK
     global FPS
     global score
+    global icScore
     score = incomingscore
+    icScore = incomingscore
     SCREEN= pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
     # This will be the main point from where our game will start
     pygame.init() # Initialize all pygame's modules
