@@ -40,6 +40,7 @@ class Environment():
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
+        self.futurerunning = True
         mixer.init()
         self.m1 = pygame.mixer.Sound('maze/beep.wav')
         self.m2 = pygame.mixer.Sound('maze/Latch_01.wav')
@@ -77,12 +78,13 @@ class Environment():
             if self.expireGame():
                     self.losetext = 'Your Time is Up!'
                     self.running = False
+                    self.futurerunning = False
                     self.beep()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_RIGHT]:
                 futureball = Rectangle.fromCircle(self.b.x+self.b.speed, self.b.y, self.b.radius)
                 if self.finishGame(futureball):
-                    self.wintext = 'You Win!'
+                    self.wintext = 'Level Success!'
                     self.running = False
                     self.beep()
                 self.handleGems(futureball)
@@ -121,7 +123,7 @@ class Environment():
                     self.beep() 
             self.draw()
         #self.clock.tick(60)
-        pygame.quit()
+        #pygame.quit()
 
     def handleGems(self,futureball):
         gi, g = self.doesIntersectWithGem(futureball)

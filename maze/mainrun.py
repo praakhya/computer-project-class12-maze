@@ -66,8 +66,8 @@ def runGame():
    
     chosenmap=random.choice([gm1, gm2])
     chosenmap.run()
-    rcg(chosenmap.env.score)
-
+    totalscore = rcg(chosenmap.env.score, chosenmap.env.futurerunning)
+    return totalscore
 
 
 

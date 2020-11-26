@@ -52,8 +52,7 @@ def startScreen():
             # If user clicks on cross button, close the game
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE): #Esc or crossed
                 print("GAME QUIT")
-                pygame.quit()
-                sys.exit()
+                return
 
             # If the user presses space or up key, start the game for them
             elif event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
@@ -62,8 +61,7 @@ def startScreen():
 
             elif event.type == KEYDOWN and event.key == K_i:
                 print("Instructions")
-                pygame.quit()
-                sys.exit()
+                return
 
                 
             else:
@@ -115,8 +113,7 @@ def mainGame():
     while True:
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                pygame.quit()
-                sys.exit()
+                return
             if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
                 if playerY > 0:
                     playerVelY = playerFlapAccv
@@ -130,8 +127,7 @@ def mainGame():
             while True:
                 for event in pygame.event.get():
                     if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                            pygame.quit()
-                            sys.exit()
+                        return
                     if event.type == KEYDOWN and (event.key == K_RETURN):
                         return
     
@@ -252,7 +248,7 @@ def getRandomObstacle():
     ]
     return obstacle
 
-def runcargame(incomingscore=0):
+def runcargame(incomingscore=0, running=True):
     global SCREEN 
     global FPSCLOCK
     global FPS
@@ -296,9 +292,9 @@ def runcargame(incomingscore=0):
 
 
     # while True:
-    startScreen() # Shows welcome screen to the user until a button is pressed
-    mainGame() # This is the main game function 
-    
+    #startScreen() # Shows welcome screen to the user until a button is pressed
+    if running:
+        mainGame() # This is the main game function 
     return score
 
 
