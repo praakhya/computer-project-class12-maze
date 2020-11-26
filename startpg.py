@@ -13,6 +13,7 @@ from maze.gamemap import GameMap
 from arushi.gameworking import runcargame as rcg
 from start.leaderboard import LeadEnvironment
 from start.infoboard import InfoEnvironment
+from maze.scorepg import ScoreEnvironment
 
 pygame.init()
 
@@ -65,7 +66,8 @@ class StartEnvironment():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         #running=False
                         self.score = mainrun.runGame()
-                        print(self.score)
+                        self.scoreenv = ScoreEnvironment(self.score)
+                        self.scoreenv.run()
                         self.screen = pygame.display.set_mode((self.w, self.h))
                 elif self.leadb.intersect(coord):
                     if event.type == pygame.MOUSEBUTTONDOWN:

@@ -1,32 +1,26 @@
 import pygame
 from start.button import Button
-
 pygame.init()
 
-class InfoEnvironment(): 
-    def __init__(self):
-        pygame.font.init() # you have to call this at the start, 
-                        # if you want to use this module.
-        f=open("start/about.txt", 'r')
-        self.textlines = f.readlines()
-        self.textsurfaces=[]
-        f.close()
-        self.txtsize =25
-        self.myfont = pygame.font.SysFont('Comic Sans MS', self.txtsize)
-        for i in self.textlines:
-            self.textsurfaces.append(self.myfont.render(i.rstrip('\n'), True, (44, 0, 105)))
-        self.headsize = 100
+class ScoreEnvironment():
+    def __init__(self, score):
+        pygame.font.init()
         self.h = 1000
         self.w = 1000
         self.maxxy = 20
         self.fact = self.h//self.maxxy
+        self.score=score
         self.screen = pygame.display.set_mode((self.w, self.h))
+        self.lstoftext =['Game Complete!', 'Your Score: {}'.format(self.score)]
+        self.txtsize =100
+        self.myfont1 = pygame.font.SysFont('Impact', self.txtsize)
+        self.myfont2 = pygame.font.SysFont('Comic Sans MS', self.txtsize)
+        self.textsurface1=self.myfont1.render(self.lstoftext[0], True, (255,255,255))
+        self.textsurface2=self.myfont2.render(self.lstoftext[1], True, (44, 50, 150))
         self.btnimg1 = "start/genbtnonclick.jpg"
         self.btnimg2 = "start/genbtn.jpg"
         self.returnb = Button(8*self.fact,16*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Return to Start')
         self.running = True
-        self.bgimg = pygame.image.load("start/leaderbg.jfif")
-        self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))
 
     def run(self):
         running=True
@@ -44,18 +38,13 @@ class InfoEnvironment():
                         flag='end'
             if flag!= 'end':
                 self.draw()
-            
     
     def draw(self):
         #self.screen.fill((0, 200, 150))
-        self.screen.blit(self.bgimg,[0,0])
+        #self.screen.blit(self.bgimg,[0,0])
         self.returnb.draw()
-        y=10
-        for i in self.textsurfaces:
-            self.screen.blit(i,(10, y))
-            y+=self.txtsize
-        pygame.display.update()
-
-
-#pygame.time.delay(200000)
+        y=50
+        self.screen.blit(self.textsurface1,(50, y))
+        self.screen.blit(self.textsurface2,(50, y+self.txtsize))
         
+        pygame.display.update()

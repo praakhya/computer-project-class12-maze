@@ -7,7 +7,7 @@ from maze.gem import Gem
 from maze.finish import Finish, Finishwall
 from maze.wall import Wall
 from pygame import mixer
-
+from start.button import Button
 class Environment(): 
     def __init__(self, w, h, background, tileh, tilev, gemimg, fact, ballcol, score=0):
         pygame.font.init() # you have to call this at the start, 
@@ -45,6 +45,8 @@ class Environment():
         self.m1 = pygame.mixer.Sound('maze/beep.wav')
         self.m2 = pygame.mixer.Sound('maze/Latch_01.wav')
         self.m1.set_volume(0.7)
+        self.btnimg1 = "maze/turqoise.png"
+        
         
         
 
@@ -153,9 +155,13 @@ class Environment():
         self.screen.blit(textsurface,(10,self.h-100))
         self.drawTime()
         if self.wintext!=None:
-            pygame.draw.rect(self.screen,(0, 204, 204 ) , (self.w//2 -150, self.h//2 -100, 500, 120))
+            '''
+            pygame.draw.rect(self.screen,(0, 204, 204 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
             textsurface = self.myfont.render(self.wintext, False, (0, 0, 0))
             self.screen.blit(textsurface,(self.w//2-100,self.h//2-100))
+            '''
+            self.windisplay = Button(4*self.fact,self.h//2,10*self.fact,2*self.fact,self.btnimg1, self.btnimg1,(0,0,0),self.screen,self.wintext)
+            self.windisplay.draw()
             pygame.display.update()
             pygame.time.delay(1200)
         if self.losetext!=None:
