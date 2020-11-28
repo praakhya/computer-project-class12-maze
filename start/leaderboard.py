@@ -7,11 +7,11 @@ class LeadEnvironment():
     def __init__(self):
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
-        self.headtxt = 'Top 10 On the Leaderboard'
+        self.headtxt = 'Top 10'
         self.headrow = "{:10s}     {:4s}".format('User Name', 'Score')
-        self.headtxtsize = 80
-        self.headrowtxtsize = 50
-        self.txtsize =40
+        self.headtxtsize = 70
+        self.headrowtxtsize = 40
+        self.txtsize =30
         self.headfont = pygame.font.SysFont('Impact', self.headtxtsize)
         self.headrowfont = pygame.font.SysFont('Impact', self.headrowtxtsize) 
         self.myfont = pygame.font.SysFont('Comic Sans MS', self.txtsize)
@@ -23,9 +23,9 @@ class LeadEnvironment():
             for i in self.scores:
                 self.textsurfaces.append(self.myfont.render("{:10s}".format(i[0]), True, (44, 0, 105)))
                 self.textsurfaces.append(self.myfont.render("{:>4d}".format(i[1]), True, (44, 0, 105)))
-        self.headsize = 100
-        self.h = 1000
-        self.w = 1000
+        self.headsize = 90
+        self.h = 700
+        self.w = 700
         self.maxxy = 20
         self.fact = self.h//self.maxxy
         self.screen = pygame.display.set_mode((self.w, self.h))

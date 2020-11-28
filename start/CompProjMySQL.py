@@ -33,7 +33,7 @@ def fetchscore():
             cursor.execute('select * from scoreboard order by score desc')
             scores = cursor.fetchmany(10)
             try:
-                fetchall()
+                cursor.fetchall()
             except:
                 pass
             

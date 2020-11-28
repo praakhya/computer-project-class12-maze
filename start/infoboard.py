@@ -11,19 +11,19 @@ class InfoEnvironment():
         self.textlines = f.readlines()
         self.textsurfaces=[]
         f.close()
-        self.txtsize =25
+        self.txtsize = 20
         self.myfont = pygame.font.SysFont('Comic Sans MS', self.txtsize)
         for i in self.textlines:
             self.textsurfaces.append(self.myfont.render(i.rstrip('\n'), True, (44, 0, 105)))
-        self.headsize = 100
-        self.h = 1000
-        self.w = 1000
+        self.headsize = 80
+        self.h = 700
+        self.w = 700
         self.maxxy = 20
         self.fact = self.h//self.maxxy
         self.screen = pygame.display.set_mode((self.w, self.h))
         self.btnimg1 = "start/genbtnonclick.jpg"
         self.btnimg2 = "start/genbtn.jpg"
-        self.returnb = Button(8*self.fact,16*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Return to Start')
+        self.returnb = Button(7*self.fact,16*self.fact,10*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Return to Start')
         self.running = True
         self.bgimg = pygame.image.load("start/leaderbg.jfif")
         self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))

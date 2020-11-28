@@ -26,8 +26,8 @@ class StartEnvironment():
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
         self.headsize = 100
-        self.h = 1000
-        self.w = 1000
+        self.h = 700
+        self.w = 700
         self.maxxy = 20
         self.fact = self.h//self.maxxy
         self.screen = pygame.display.set_mode((self.w, self.h))
@@ -40,7 +40,7 @@ class StartEnvironment():
         self.leaderbimg2 = "start/leaderboardonclick.jfif"
         self.infobimg = "start/info.png"
         self.headb = Button(6*self.fact,6*self.fact,10*self.fact,3*self.fact,self.headbimg1, self.headbimg2,(255, 255, 255),self.screen,'Games',self.headsize)
-        self.leadb = Button(8*self.fact,10*self.fact,6*self.fact,2*self.fact,self.leaderbimg1, self.leaderbimg2,(0,0,0),self.screen,'Leaderboard')
+        self.leadb = Button(7*self.fact,10*self.fact,8*self.fact,2*self.fact,self.leaderbimg1, self.leaderbimg2,(0,0,0),self.screen,'Leaderboard')
         self.startb = Button(8*self.fact,13*self.fact,6*self.fact,2*self.fact,self.startbimg1, self.startbimg2,(0,0,0),self.screen,'Start')
         self.quitb = Button(8*self.fact,16*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Quit')
         self.infob = Button(18*self.fact, 18*self.fact, 1*self.fact, 1*self.fact, self.infobimg, self.infobimg, (0,0,0), self.screen, ' ')
@@ -68,6 +68,8 @@ class StartEnvironment():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         #running=False
                         self.score = mainrun.runGame()
+                        if self.score ==None:
+                            self.score=0
                         sb(getpass.getuser(), self.score)
                         self.scoreenv = ScoreEnvironment(self.score)
                         self.scoreenv.run()

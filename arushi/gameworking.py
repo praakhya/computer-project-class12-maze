@@ -256,6 +256,8 @@ def runcargame(incomingscore=0, running=True):
     global icScore
     score = incomingscore
     icScore = incomingscore
+    if not running:
+        return
     SCREEN= pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
     # This will be the main point from where our game will start
     pygame.init() # Initialize all pygame's modules
@@ -293,8 +295,8 @@ def runcargame(incomingscore=0, running=True):
 
     # while True:
     #startScreen() # Shows welcome screen to the user until a button is pressed
-    if running:
-        mainGame() # This is the main game function 
+    
+    mainGame() # This is the main game function 
     return score
 
 

@@ -11,8 +11,8 @@ pygame.init()
 
 class GameMap():
     def __init__(self, map, bgimg, obstacleimg, pointimg, ballcol, score=0):
-        self.cnvh = 1000
-        self.cnvw = 1000
+        self.cnvh = 700
+        self.cnvw = 700
         self.maxx = 21
         self.maxy=18
         self.bgimg = bgimg
