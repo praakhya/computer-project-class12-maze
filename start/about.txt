@@ -6,3 +6,4 @@ The game has 2 Levels
 The first level is maze with a locked end gate. The gate is unlocked by 5 gems
 The second level is a variation of the game Flappy Bird. 
 This game continues till the time the player doesnt collide into an obstacle
+The scores and leaderboard are managed using a mySQL database hosted on cloud

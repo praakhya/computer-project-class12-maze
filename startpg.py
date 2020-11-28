@@ -14,6 +14,8 @@ from arushi.gameworking import runcargame as rcg
 from start.leaderboard import LeadEnvironment
 from start.infoboard import InfoEnvironment
 from maze.scorepg import ScoreEnvironment
+from start.CompProjMySQL import scoreboard as sb
+import getpass
 
 pygame.init()
 
@@ -42,7 +44,7 @@ class StartEnvironment():
         self.startb = Button(8*self.fact,13*self.fact,6*self.fact,2*self.fact,self.startbimg1, self.startbimg2,(0,0,0),self.screen,'Start')
         self.quitb = Button(8*self.fact,16*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Quit')
         self.infob = Button(18*self.fact, 18*self.fact, 1*self.fact, 1*self.fact, self.infobimg, self.infobimg, (0,0,0), self.screen, ' ')
-        self.leadenv = LeadEnvironment()
+        
         self.infoenv = InfoEnvironment()
         self.running = True
         self.bgimg = pygame.image.load(background)
@@ -66,11 +68,13 @@ class StartEnvironment():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         #running=False
                         self.score = mainrun.runGame()
+                        sb(getpass.getuser(), self.score)
                         self.scoreenv = ScoreEnvironment(self.score)
                         self.scoreenv.run()
                         self.screen = pygame.display.set_mode((self.w, self.h))
                 elif self.leadb.intersect(coord):
                     if event.type == pygame.MOUSEBUTTONDOWN:
+                        self.leadenv = LeadEnvironment()
                         self.leadenv.run()
                         pygame.init()
                 elif self.infob.intersect(coord):
