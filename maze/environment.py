@@ -17,6 +17,7 @@ class Environment():
         self.h = h
         self.fact = fact
         self.ballcol = ballcol
+        self.clock = pygame.time.Clock()
         self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, self.ballcol,self, 5)
         self.running = True
         self.score=score
@@ -124,7 +125,7 @@ class Environment():
                 else:
                     self.beep() 
             self.draw()
-        #self.clock.tick(60)
+        self.clock.tick(30)
         #pygame.quit()
 
     def handleGems(self,futureball):
