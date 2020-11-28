@@ -125,7 +125,7 @@ class Environment():
                 else:
                     self.beep() 
             self.draw()
-        self.clock.tick(30)
+            self.clock.tick(30)
         #pygame.quit()
 
     def handleGems(self,futureball):
