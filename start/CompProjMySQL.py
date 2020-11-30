@@ -36,11 +36,6 @@ def fetchscore():
                 cursor.fetchall()
             except:
                 pass
-            
-            for i in scores:
-                for j in i:
-                    print(j, end = '\t')
-                print()
             cursor.close()
             connection.close()
             return scores

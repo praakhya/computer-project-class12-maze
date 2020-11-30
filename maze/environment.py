@@ -46,6 +46,7 @@ class Environment():
         self.m2 = pygame.mixer.Sound('maze/Latch_01.wav')
         self.m1.set_volume(0.7)
         self.btnimg1 = "maze/turqoise.png"
+        self.btnimg2 ="maze/btnimg2.jpg"
         
         
         
@@ -165,9 +166,13 @@ class Environment():
             pygame.display.update()
             pygame.time.delay(1200)
         if self.losetext!=None:
+            '''
             pygame.draw.rect(self.screen,(200, 0, 0 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
             textsurface = self.myfont.render(self.losetext, False, (0, 0, 0))
             self.screen.blit(textsurface,(self.w//2-275,self.h//2-100))
+            '''
+            self.losedisplay = Button(4*self.fact,self.h//2,10*self.fact,2*self.fact,self.btnimg2, self.btnimg2,(0,0,0),self.screen,self.losetext)
+            self.losedisplay.draw()
             pygame.display.update()
             pygame.time.delay(1200)
         pygame.display.update()
