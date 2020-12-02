@@ -3,7 +3,7 @@ pygame.font.init()
 pygame.init()
 
 class Button():
-    def __init__(self, x,y,w,h,btnimg1, btnimg2,txtcol,screen,txt, txtsize=50):
+    def __init__(self, x,y,w,h,bimg1, bimg2,txtcol,screen,txt, txtsize=50):
         self.x =x
         self.y = y
         self.w = w
@@ -11,9 +11,9 @@ class Button():
         self.txtcol =txtcol
         self.txt=txt
         self.textx = self.x; self.texty = self.y
-        self.btnimg1 = pygame.image.load(btnimg1)
+        self.btnimg1 = pygame.image.load(bimg1)
         self.btnimg1 = pygame.transform.scale(self.btnimg1,(self.w,self.h))
-        self.btnimg2 = pygame.image.load(btnimg2)
+        self.btnimg2 = pygame.image.load(bimg2)
         self.btnimg2 = pygame.transform.scale(self.btnimg2,(self.w,self.h))
         self.btnimg = self.btnimg2
         self.screen = screen
