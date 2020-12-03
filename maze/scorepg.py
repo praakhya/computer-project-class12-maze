@@ -2,7 +2,7 @@ import pygame
 from start.button import Button
 pygame.init()
 
-class ScoreEnvironment():
+class ScoreEnvironment(): #This class is responsible to display and run all elements on the end score screen
     def __init__(self, score):
         pygame.font.init()
         self.h = 700
@@ -11,7 +11,7 @@ class ScoreEnvironment():
         self.fact = self.h//self.maxxy
         self.score=score
         self.screen = pygame.display.set_mode((self.w, self.h))
-        self.lstoftext =['Game Complete!', 'Your Score: {}'.format(self.score)]
+        self.lstoftext =['Game Complete!', 'Your Score: {}'.format(self.score)] #This is a list containing all lines in the screen
         self.txtsize =70
         self.myfont1 = pygame.font.SysFont('Impact', self.txtsize)
         self.myfont2 = pygame.font.SysFont('Comic Sans MS', self.txtsize)
@@ -24,10 +24,9 @@ class ScoreEnvironment():
         self.bgimg = pygame.image.load("maze/scorebg.jpg")
         self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))
 
-    def run(self):
+    def run(self): #All elements of the score page are run from here
         running=True
-        self.draw()
-        flag=None
+        self.draw() #the draw fundtion(which draws everything on the screen) is called
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -37,9 +36,7 @@ class ScoreEnvironment():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         print('True')
                         running=False
-                        flag='end'
-            if flag!= 'end':
-                self.draw()
+            self.draw()
     
     def draw(self):
         self.screen.blit(self.bgimg,[0,0])

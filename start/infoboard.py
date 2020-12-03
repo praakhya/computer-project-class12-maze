@@ -1,6 +1,5 @@
 import pygame
 from start.button import Button
-
 pygame.init()
 
 class InfoEnvironment(): 

@@ -2,7 +2,7 @@ import pygame
 pygame.font.init()
 pygame.init()
 
-class Button():
+class Button(): #This class is used to create buttons everywhere in the program
     def __init__(self, x,y,w,h,bimg1, bimg2,txtcol,screen,txt, txtsize=50):
         self.x =x
         self.y = y
@@ -18,32 +18,30 @@ class Button():
         self.btnimg = self.btnimg2
         self.screen = screen
         self.txtsize = txtsize
-        self.myfont = pygame.font.SysFont('Impact', self.txtsize)
+        self.myfont = pygame.font.SysFont('Impact', self.txtsize) 
         self.adjusted = False
-        self.textsurface = self.myfont.render(self.txt, True, self.txtcol)
-        
-    def draw(self):
+        self.textsurface = self.myfont.render(self.txt, True, self.txtcol) #this is the text on the button
         self.rect = list(self.textsurface.get_rect())
-        self.wgap = (self.w - self.rect[2])/2
-        self.hgap = (self.h - self.rect[3])/2
-        if self.adjusted==False:
+        self.text_width, self.text_height = self.myfont.size(txt)
+        self.wgap = (self.w - self.text_width)/2
+        self.hgap = (self.h - self.text_height)/2
+        
+    def draw(self): #this will draw all the elements of the button on the screen given
+        if self.adjusted==True:
+            pass
+        else: 
             if self.wgap>0:
                 self.textx += self.wgap
             elif self.wgap==0:
-                self.w +=2
+                self.w +=10
                 self.textx+=1
-            else:
-                self.x -=self.wgap
-                self.w+=(self.wgap)*2
 
-            if self.wgap>0:
+            if self.hgap>0:
                 self.texty += self.hgap
-            elif self.wgap==0:
-                self.y -=1
-                self.h +=2
-            else:
-                self.y -= self.hgap
-                self.h += (self.hgap)*2
+            elif self.hgap==0:
+                self.y -=10
+                self.h +=20
+
             self.adjusted=True
         #self.screen.draw.text(self.txt, (self.x, self.y), owidth=1.5, ocolor=self.btncol, color=self.txtcol)  
         
@@ -51,13 +49,7 @@ class Button():
         self.screen.blit(self.btnimg,[self.x,self.y])
         self.screen.blit(self.textsurface,(self.textx, self.texty))
 
-        '''
-        text = font.render("You win!", True, BLACK)
-        text_rect = text.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
-        screen.blit(text, text_rect)
-        '''
-
-    def intersect(self,coord):
+    def intersect(self,coord): #it will check if the given coordinate will come within the area of the button or not
         x,y=coord
         if self.x <= x <= self.x + self.w and self.y <= y <= self.y + self.h:
             self.btnimg =self.btnimg1
@@ -66,7 +58,7 @@ class Button():
             self.btnimg = self.btnimg2
             return False
 
-
+    
 
 
 

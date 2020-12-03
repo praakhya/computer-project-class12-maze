@@ -4,22 +4,15 @@ This is the main program executor for the maze project.
 \@Roll No 42
 '''
 
-import pygame, sys, random
-from pygame.locals import *
-from maze.rectangle import Rectangle
-import time
-from maze.environment import Environment
-from maze.wall import Wall
-from maze.gem import Gem
-from maze.finish import Finish
-from maze.gamemap import GameMap
-from arushi.gameworking import runcargame as rcg
+import pygame, random  
+from maze.gamemap import GameMap #a class which draws any maze map
+from arushi.gameworking import runcargame as rcg #importing the run code of the second level
 
 pygame.init()
 
-def runGame():
+def runGame(): #this function is called whenever the two game levels have to be run
 
-    map1=[
+    map1=[                                          #this is the first game map. each letter W is for 'wall'. if a w is read, a wall will be painted. This operation happens in another module
         "WWWWWWWWWWWWWWWWWWWWW",
         "WEEEEEEEEEEEEEEEEEEEW",
         "WEWWWWWWWWWWWEEWWEWEW",
@@ -61,13 +54,68 @@ def runGame():
         'W'*21
     ]
     
-    gm1 = GameMap(map1,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199))
+    gm1 = GameMap(map1,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199)) #the GameMap class will draw the maze
     gm2 = GameMap(map2,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20))
    
-    chosenmap=random.choice([gm1, gm2])
-    chosenmap.run()
-    totalscore = rcg(chosenmap.env.score, chosenmap.env.futurerunning)
-    return totalscore
+    chosenmap=random.choice([gm1, gm2]) #at every run, any one of the two mazes could be printed for the player to play
+    firstscore = chosenmap.run()
+    totalscore = rcg(firstscore, chosenmap.env.futurerunning)
+    return totalscore #this is the total score from bothe games
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

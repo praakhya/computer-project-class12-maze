@@ -35,3 +35,4 @@ class GameMap():
         self.env.addFinish(self.fin)
         self.env.addFinishwall(self.finwall)
         self.env.run()
+        return self.env.score
