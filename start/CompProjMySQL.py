@@ -3,7 +3,6 @@ import mysql.connector
 #the database and table have already been created
 def getConnection():
     connection = mysql.connector.connect(host = 'localhost', user = 'root', passwd = 'pa123', database = 'score')
-    #connection = mysql.connector.connect(host = 'praakhya-project-1.cuq0ocqogo0p.us-east-1.rds.amazonaws.com', user = 'admin', passwd = 'Admin#1234#', database = 'score')#type your password here
     return connection
     
 def scoreboard(name, score):
