@@ -2,7 +2,7 @@ import pygame
 from start.button import Button
 pygame.init()
 
-class InfoEnvironment(): 
+class InfoEnvironment(): #This class displays and runs everything on the information page
     def __init__(self):
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
