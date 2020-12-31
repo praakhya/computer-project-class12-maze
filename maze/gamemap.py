@@ -20,7 +20,7 @@ class GameMap():
         self.pointimg = pointimg
         self.ballcol = ballcol
         self.fact = min(self.cnvw//self.maxx, self.cnvh//self.maxy)
-        self.env = Environment(self.cnvw, self.cnvh, self.bgimg, self.obstacleimg, self.obstacleimg, self.pointimg, self.fact, self.ballcol, score)
+        self.env = Environment(self.cnvw, self.cnvh, self.bgimg, self.obstacleimg, self.pointimg, self.fact, self.ballcol, score)
         self.fin = Finish(int(20*self.fact), int(15*self.fact), 1*self.fact, 2*self.fact, self.env)
         self.finwall = Finishwall(int(20*self.fact), int(15*self.fact), 2*self.fact, self.obstacleimg, self.env)
         #walls=[]

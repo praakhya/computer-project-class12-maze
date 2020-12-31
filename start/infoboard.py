@@ -14,7 +14,6 @@ class InfoEnvironment(): #This class displays and runs everything on the informa
         self.myfont = pygame.font.SysFont('Comic Sans MS', self.txtsize)
         for i in self.textlines:
             self.textsurfaces.append(self.myfont.render(i.rstrip('\n'), True, (44, 0, 105)))
-        self.headsize = 80
         self.h = 700
         self.w = 700
         self.maxxy = 20

@@ -9,7 +9,7 @@ from maze.wall import Wall
 from pygame import mixer
 from start.button import Button
 class Environment(): 
-    def __init__(self, w, h, background, tileh, tilev, gemimg, fact, ballcol, score=0):
+    def __init__(self, w, h, background, tile, gemimg, fact, ballcol, score=0):
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
         self.myfont = pygame.font.SysFont('Impact', 100)
@@ -35,8 +35,8 @@ class Environment():
         self.gemCount = 0
         self.bgimg = pygame.image.load(background)
         self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))
-        self.tilehimg = pygame.image.load(tileh)
-        self.tilevimg = pygame.image.load(tilev)
+        self.tileimg = pygame.image.load(tile)
+        #self.tilevimg = pygame.image.load(tilev)
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
         self.startTime = time.process_time()
