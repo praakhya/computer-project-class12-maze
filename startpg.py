@@ -3,14 +3,12 @@ from start.button import Button
 from maze import mainrun
 import pygame, sys, random
 from start.leaderboard import LeadEnvironment
+from start.choiceboard import ChoiceEnvironment
 from start.infoboard import InfoEnvironment
 from maze.scorepg import ScoreEnvironment
 from start.CompProjMySQL import scoreboard as sb
 import getpass
-
 pygame.init()
-
-
 
 class StartEnvironment():  #This is a class which makes the start page and all elements on it when the program is executed
     def __init__(self, background):
@@ -31,12 +29,12 @@ class StartEnvironment():  #This is a class which makes the start page and all e
         self.leaderbimg2 = "start/leaderboardonclick.jfif"
         self.infobimg = "start/info.png"
         #the following 5 variables initialise the buttons on the screen. The buttons are created by the button class.
-        self.headb = Button(6*self.fact,6*self.fact,10*self.fact,3*self.fact,self.headbimg1, self.headbimg2,(255, 255, 255),self.screen,'Arena',self.headsize)
-        self.leadb = Button(7*self.fact,10*self.fact,8*self.fact,2*self.fact,self.leaderbimg1, self.leaderbimg2,(0,0,0),self.screen,'Leaderboard')
-        self.startb = Button(8*self.fact,13*self.fact,6*self.fact,2*self.fact,self.startbimg1, self.startbimg2,(0,0,0),self.screen,'Start')
-        self.quitb = Button(8*self.fact,16*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Quit')
-        self.infob = Button(18*self.fact, 18*self.fact, 1*self.fact, 1*self.fact, self.infobimg, self.infobimg, (0,0,0), self.screen, ' ')
-        
+        self.headb = Button(6*self.fact,4*self.fact,10*self.fact,3*self.fact,self.headbimg1, self.headbimg2,(255, 255, 255),self.screen,'Arena',self.headsize)
+        self.leadb = Button(7*self.fact,8*self.fact,8*self.fact,2*self.fact,self.leaderbimg1, self.leaderbimg2,(0,0,0),self.screen,'Leaderboard')
+        self.startb = Button(8*self.fact,11*self.fact,6*self.fact,2*self.fact,self.startbimg1, self.startbimg2,(0,0,0),self.screen,'Start')
+        self.quitb = Button(8*self.fact,14*self.fact,6*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Quit')
+        self.infob = Button(18*self.fact, 16*self.fact, 1*self.fact, 1*self.fact, self.infobimg, self.infobimg, (0,0,0), self.screen, ' ')
+        self.choiceb = Button(6*self.fact,17*self.fact,10*self.fact,2*self.fact,self.leaderbimg1, self.leaderbimg2,(0,0,0),self.screen,'Choose a Game')
         self.infoenv = InfoEnvironment() #This is the enivronment of the info page - a subpage of the start page.
         self.running = True
         self.bgimg = pygame.image.load(background)
@@ -68,6 +66,11 @@ class StartEnvironment():  #This is a class which makes the start page and all e
                         self.leadenv = LeadEnvironment()
                         self.leadenv.run()
                         pygame.init()
+                elif self.choiceb.intersect(coord): #checking if the mouse pointer is within the area of the leaderboard button
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        self.chenv = ChoiceEnvironment()
+                        self.chenv.run()
+                        pygame.init()
                 elif self.infob.intersect(coord): #checking if the mouse pointer is within the area of the info button
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         self.infoenv.run()
@@ -83,6 +86,7 @@ class StartEnvironment():  #This is a class which makes the start page and all e
         self.startb.draw()
         self.quitb.draw()
         self.infob.draw()
+        self.choiceb.draw()
         pygame.display.update()
  
 env = StartEnvironment("start/startbg.jpg")

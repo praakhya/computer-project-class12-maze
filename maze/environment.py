@@ -48,16 +48,14 @@ class Environment():
         self.btnimg1 = "maze/turqoise.png"
         self.btnimg2 ="maze/btnimg2.jpg"
         
-        
-        
-
     def drawTime(self):
-        elapsedTime = time.process_time() - self.startTime
-        elapsedSeconds = int(elapsedTime % 60)
-        elapsedTime = elapsedTime // 60
-        elapsedMinutes = int(elapsedTime % 60)
-        elapsedTime = elapsedTime // 60
-        elapsedHours = int(elapsedTime)
+        self.elapsedTime = time.process_time() - self.startTime
+        et = self.elapsedTime
+        elapsedSeconds = int(et % 60)
+        et = et // 60
+        elapsedMinutes = int(et % 60)
+        et = et // 60
+        elapsedHours = int(et)
         timeString = "{:02d}:{:02d}:{:02d}".format(elapsedHours, elapsedMinutes, elapsedSeconds)
         textsurface = self.myfont.render(timeString, False, (0, 0, 0))
         self.screen.blit(textsurface,(self.w - 400,self.h-100))
@@ -237,11 +235,12 @@ class Environment():
     def finishGame(self, r):
         rw = Rectangle(self.fin.x, self.fin.y, self.fin.w, self.fin.h)
         if rw.intersect(r):
+            self.score+=(60 - int(self.elapsedTime))*2
             return True
         return False
     
     def expireGame(self):
-        if time.process_time() - self.startTime>=60:
+        if self.elapsedTime>=60:
             return True
         return False
 

@@ -63,8 +63,64 @@ def runGame(): #this function is called whenever the two game levels have to be 
     return totalscore #this is the total score from bothe games
 
 
+def runMaze1(): #this function is called whenever the first maze level has to be run
 
+    
+    map1=[
+        'W'*21,
+        'WEEEEEEEEEWEEEEEEEEEW',
+        'WEWWWWWWWEWEWWWEWWWWW',
+        'WEWEEEEEWEWEWEWEEEEEW',
+        'WEWEEEEEWEWEWEWWWEEEW',
+        'WEWWWWWEWEEEWEEEEEEEW',
+        'WEWEEEWEWWWWWWWWWWEEW',
+        'WEWWWEWEWEEEWEEEEEEEW',
+        'WEEEWEWEEEWEWEWWWWWWW',
+        'WEWWWEWEWWWEWEWEEEEEW',
+        'WEEEEEEEWEEEWEWEWEWWW',
+        'WWWWWEWWWWWWWEWEWEEEW',
+        'WEEEEEWEEEEEEEWEWWEEW',
+        'WEWEWWWEWWWWWWWEWEEEW',
+        'EEWEWEEEWEEEWEEEWEEEW',
+        'WEWWWEWWWEWEWEWEWEEEE',
+        'WEWEEEEEEEWEEEWEWEEEE',
+        'W'*21
+    ]
+    
+    gm1 = GameMap(map1,"maze/winterlandscape.png","maze/brick1x1.jpg", "maze/gems.png", (20,20,20)) #the GameMap class will draw the maze
+    score = gm1.run()
+    return score #this is the score from the maze map chosen
 
+def runMaze2(): #this function is called whenever the second maze level has to be run
+
+    map2=[                                          
+        "WWWWWWWWWWWWWWWWWWWWW",
+        "WEEEEEEEEEEEEEEEEEEEW",
+        "WEWWWWWWWWWWWEEWWEWEW",
+        "WEEEEEWEEEEEWWEEWEWEW",
+        "WEEEEEWEWWWEEWEEEEWEW",
+        "WEEEEEWEWEWWEWWWWWWEW",
+        "WEEEEEWEWEEEEEEEEEEEW",
+        "WWWEEEWEWWWWWWWWWEWWW",
+        "WEWEEEWEEEWEEEEEWEEEW",
+        "WEWWWEWEEEWEWWWWWEWEW",
+        "WEWEEEWEEEWEWEEEEEWEW",
+        "WEWEWWWWEEWEWEWWWWWWW",
+        "WEWEWEEEEEWEEEEWEEEEW",
+        "WEWEWEWWWWWEWWEWEWWWW",
+        "EEWEWEEEEEEEWEEWEWEEW",
+        "WEWEWWWEWWWWWEEWEEEEE",
+        "WEEEWEWEEEEEEEEEEWEEE",
+        "WWWWWWWWWWWWWWWWWWWWW"
+        ]
+    
+    gm2 = GameMap(map2,"maze/nightbg.jpg","maze/neontile.png", "maze/neongem.png",(255, 110, 199)) #the GameMap class will draw the maze
+    score = gm2.run()
+    return score #this is the score from the maze map chosen
+
+def runFlappy(): #this function is called whenever the Flappy bird level has to be run
+    score = rcg(0, True)
+    return score 
 
 
 

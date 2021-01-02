@@ -3,7 +3,7 @@ from start.button import Button
 pygame.init()
 
 class ScoreEnvironment(): #This class is responsible to display and run all elements on the end score screen
-    def __init__(self, score):
+    def __init__(self, score, btntxt='Return to Start'):
         pygame.font.init()
         self.h = 700
         self.w = 700
@@ -19,7 +19,7 @@ class ScoreEnvironment(): #This class is responsible to display and run all elem
         self.textsurface2=self.myfont2.render(self.lstoftext[1], True, (64, 224, 208))
         self.btnimg1 = "maze/scorebtn.jpg"
         self.btnimg2 = "maze/scorebtn1.jpg"
-        self.returnb = Button(7*self.fact,16*self.fact,10*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,'Return to Start')
+        self.returnb = Button(7*self.fact,16*self.fact,10*self.fact,2*self.fact,self.btnimg1, self.btnimg2,(0,0,0),self.screen,btntxt)
         self.running = True
         self.bgimg = pygame.image.load("maze/scorebg.jpg")
         self.bgimg = pygame.transform.scale(self.bgimg,(self.w,self.h))
