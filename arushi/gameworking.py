@@ -10,9 +10,9 @@ import random # For generating random numbers
 
 # Global Variables for the game
 FPS = 32 #Frames per second
-SCREENWIDTH = 500
-SCREENHEIGHT = 500
-GROUND_Y = SCREENHEIGHT * 0.84
+SCREENWIDTH = 700
+SCREENHEIGHT = 700
+GROUND_Y = SCREENHEIGHT * 0.75
 IMAGES = {}
 SOUND = {}
 REWARD_POINTS = 5
@@ -47,32 +47,33 @@ def startScreen():
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
+    SCREEN.blit(IMAGES['background'], (0, 0))    
+    SCREEN.blit(IMAGES['player'], (playerX, playerY))    
+    SCREEN.blit(IMAGES['message'], (messageX,messageY ))    
+    SCREEN.blit(IMAGES['base'], (basex, GROUND_Y))    
+    pygame.display.update()
+    FPSCLOCK.tick(FPS)
     while True:
         for event in pygame.event.get():
             # If user clicks on cross button, close the game
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE): #Esc or crossed
                 print("GAME QUIT")
-                return
+                return False
 
             # If the user presses space or up key, start the game for them
             elif event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
                 print("Starting Game")
-                return
+                return True
 
             elif event.type == KEYDOWN and event.key == K_i:
                 print("Instructions")
-                return
+                return True
 
                 
             else:
-                SCREEN.blit(IMAGES['background'], (0, 0))    
-                SCREEN.blit(IMAGES['player'], (playerX, playerY))    
-                SCREEN.blit(IMAGES['message'], (messageX,messageY ))    
-                SCREEN.blit(IMAGES['base'], (basex, GROUND_Y))    
-                pygame.display.update()
-                FPSCLOCK.tick(FPS)
+                pass
 
-def mainGame():
+def mainGame(running):
     global FPS
     global score
     playerX = int(SCREENWIDTH/5)
@@ -110,7 +111,7 @@ def mainGame():
     playerFlapped = False # It is true only when the bird is flapping
 
 
-    while True:
+    while running:
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 return
@@ -277,7 +278,7 @@ def runcargame(incomingscore=0, running=True):
     )
 
     IMAGES['message'] =pygame.image.load('arushi/gallery/firstScreen.png').convert_alpha()
-    IMAGES['base'] =pygame.image.load('arushi/gallery/base.png').convert_alpha()
+    IMAGES['base'] =pygame.transform.scale(pygame.image.load('arushi/gallery/base.png').convert_alpha(),(SCREENWIDTH,300))
     IMAGES['background'] = pygame.image.load(BACKGROUND).convert()
     IMAGES['player'] = pygame.image.load(PLAYER).convert_alpha()
     IMAGES['rewardImage'] = pygame.image.load(REWARD).convert_alpha()
@@ -293,10 +294,10 @@ def runcargame(incomingscore=0, running=True):
     SOUND['wing'] = pygame.mixer.Sound('arushi/gallery/audio/wing.wav')
 
 
-    # while True:
-    #startScreen() # Shows welcome screen to the user until a button is pressed
-    
-    mainGame() # This is the main game function 
+    #The program is run
+    # Shows welcome screen to the user until a button is pressed
+    # This is the main game function 
+    mainGame(startScreen())
     return score
 
 
