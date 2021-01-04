@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\praak\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+    "python.pythonPath": "/usr/local/bin/python3",
     "python.linting.enabled": true
 }
