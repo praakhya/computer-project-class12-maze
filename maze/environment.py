@@ -17,7 +17,7 @@ class Environment():
         self.h = h
         self.fact = fact
         self.ballcol = ballcol
-        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, self.ballcol,self, 2)
+        self.b = Ball(int(0.5*self.fact), int(14.5*self.fact), 0.25*self.fact, self.ballcol,self, 5)
         self.running = True
         self.score=score
         #self.clock = pygame.time.Clock()
@@ -47,6 +47,8 @@ class Environment():
         self.m1.set_volume(0.7)
         self.btnimg1 = "maze/turqoise.png"
         self.btnimg2 ="maze/btnimg2.jpg"
+        self.screen = pygame.display.set_mode((self.w,self.h))
+
         
     def drawTime(self):
         self.elapsedTime = time.process_time() - self.startTime
@@ -70,6 +72,8 @@ class Environment():
     def run(self):
         self.spawnGems()
         self.draw()
+        clock =  pygame.time.Clock()
+        clock.tick(30)
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -123,7 +127,8 @@ class Environment():
                 else:
                     self.beep() 
             self.draw()
-        #self.clock.tick(60)
+            print(clock.get_fps())
+            clock.tick(30)
         #pygame.quit()
 
     def handleGems(self,futureball):
@@ -138,7 +143,6 @@ class Environment():
 
 
     def draw(self):
-        self.screen = pygame.display.set_mode((self.w,self.h))
         self.screen.blit(self.bgimg,[0,0])
         for j in self.gems:
             j.draw()

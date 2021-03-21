@@ -36,5 +36,6 @@ def newconnection(user, pwd):
         cursor.execute('INSERT INTO scoreboard VALUES {}'.format(i))
     cursor.execute('select * from scoreboard')
     print(cursor.fetchall())
-
-newconnection(pwd='sql123', user='root')
+    connection.commit()
+    connection.close()
+newconnection(pwd='pa123456', user='root')
