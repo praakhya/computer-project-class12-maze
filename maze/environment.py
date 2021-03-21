@@ -39,7 +39,7 @@ class Environment():
         #self.tilevimg = pygame.image.load(tilev)
         self.gemimg = pygame.image.load(gemimg)
         self.gemimg = pygame.transform.scale(self.gemimg,(self.gemw,self.gemh))
-        self.startTime = time.process_time()
+        self.startTime = time.monotonic()
         self.futurerunning = True
         mixer.init()
         self.m1 = pygame.mixer.Sound('maze/beep.wav')
@@ -51,7 +51,7 @@ class Environment():
 
         
     def drawTime(self):
-        self.elapsedTime = time.process_time() - self.startTime
+        self.elapsedTime = time.monotonic() - self.startTime
         et = self.elapsedTime
         elapsedSeconds = int(et % 60)
         et = et // 60
@@ -127,7 +127,6 @@ class Environment():
                 else:
                     self.beep() 
             self.draw()
-            print(clock.get_fps())
             clock.tick(30)
         #pygame.quit()
 
@@ -156,7 +155,6 @@ class Environment():
             i.draw()
         textsurface = self.myfont.render(str(self.score), False, (0, 0, 0))
         self.screen.blit(textsurface,(10,self.h-100))
-        self.drawTime()
         if self.wintext!=None:
             '''
             pygame.draw.rect(self.screen,(0, 204, 204 ) , (self.w//2 -300, self.h//2 -100, 700, 120))
@@ -177,6 +175,7 @@ class Environment():
             self.losedisplay.draw()
             pygame.display.update()
             pygame.time.delay(1200)
+        self.drawTime()
         pygame.display.update()
         
     def addWall(self, wl):
