@@ -20,10 +20,10 @@ SCREENCAPTION = 'Game 2'
 score = 0
 icScore = 0
 #Images
-PLAYER = 'arushi/gallery/car.png'            
-BACKGROUND = 'arushi/gallery/background.jpg' 
-OBSTACLE = 'arushi/gallery/obstacle.png'     
-REWARD = 'arushi/gallery/diamond.png'
+PLAYER = 'game2/gallery/car.png'            
+BACKGROUND = 'game2/gallery/background.jpg' 
+OBSTACLE = 'game2/gallery/obstacle.png'     
+REWARD = 'game2/gallery/diamond.png'
 
 
 #Initial blank screen
@@ -265,20 +265,20 @@ def runcargame(incomingscore=0, running=True):
     FPSCLOCK = pygame.time.Clock()
     pygame.display.set_caption(SCREENCAPTION)
     IMAGES['numbers'] = ( 
-        pygame.image.load('arushi/gallery/images/0.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/1.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/2.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/3.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/4.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/5.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/6.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/7.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/8.png').convert_alpha(),
-        pygame.image.load('arushi/gallery/images/9.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/0.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/1.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/2.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/3.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/4.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/5.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/6.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/7.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/8.png').convert_alpha(),
+        pygame.image.load('game2/gallery/images/9.png').convert_alpha(),
     )
 
-    IMAGES['message'] =pygame.image.load('arushi/gallery/firstScreen.png').convert_alpha()
-    IMAGES['base'] =pygame.transform.scale(pygame.image.load('arushi/gallery/base.png').convert_alpha(),(SCREENWIDTH,300))
+    IMAGES['message'] =pygame.image.load('game2/gallery/firstScreen.png').convert_alpha()
+    IMAGES['base'] =pygame.transform.scale(pygame.image.load('game2/gallery/base.png').convert_alpha(),(SCREENWIDTH,300))
     IMAGES['background'] = pygame.image.load(BACKGROUND).convert()
     IMAGES['player'] = pygame.image.load(PLAYER).convert_alpha()
     IMAGES['rewardImage'] = pygame.image.load(REWARD).convert_alpha()
@@ -287,11 +287,11 @@ def runcargame(incomingscore=0, running=True):
     )
 
     # Game sounds
-    SOUND['die'] = pygame.mixer.Sound('arushi/gallery/audio/die.wav')
-    SOUND['hit'] = pygame.mixer.Sound('arushi/gallery/audio/hit.wav')
-    SOUND['point'] = pygame.mixer.Sound('arushi/gallery/audio/point.wav')
-    SOUND['swoosh'] = pygame.mixer.Sound('arushi/gallery/audio/swoosh.wav')
-    SOUND['wing'] = pygame.mixer.Sound('arushi/gallery/audio/wing.wav')
+    SOUND['die'] = pygame.mixer.Sound('game2/gallery/audio/die.wav')
+    SOUND['hit'] = pygame.mixer.Sound('game2/gallery/audio/hit.wav')
+    SOUND['point'] = pygame.mixer.Sound('game2/gallery/audio/point.wav')
+    SOUND['swoosh'] = pygame.mixer.Sound('game2/gallery/audio/swoosh.wav')
+    SOUND['wing'] = pygame.mixer.Sound('game2/gallery/audio/wing.wav')
 
 
     #The program is run

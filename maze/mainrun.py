@@ -1,12 +1,10 @@
-'''
-This is the main program executor for the maze project.
-\@Author Praakhya Avasthi
-\@Roll No 42
-'''
+
+#This is the main program executor for the maze and race game project.
+
 
 import pygame, random  
 from maze.gamemap import GameMap #a class which draws any maze map
-from arushi.gameworking import runcargame as rcg #importing the run code of the second level
+from game2.gameworking import runcargame as rcg #importing the run code of the second level
 
 pygame.init()
 
